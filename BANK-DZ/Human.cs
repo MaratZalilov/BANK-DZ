@@ -18,12 +18,12 @@ namespace BANK_DZ
             Console.WriteLine($"Ваш номер счёта в банке {_number}");
         }
 
-        public void DeleteNumber(Bank bank,Human human1)
+        public void DeleteNumber(Bank bank1, Human human1)
         {
             if (_isHave == true)
             {
                 _isHave = false;
-                
+                bank1.CloseScore(human1, bank1);
             }
             else
             {
@@ -57,7 +57,7 @@ namespace BANK_DZ
         {
             string select1 = Console.ReadLine();
             int money1 = int.Parse(select1);
-            if(_money >= money1)
+            if (_money >= money1)
             {
                 _money = _money - money1;
                 Console.WriteLine($"Вы пополнили счёт");
@@ -70,7 +70,7 @@ namespace BANK_DZ
             return 0;
         }
 
-        public int WitchDrawMoney (Bank bank)
+        public int WitchDrawMoney(Bank bank)
         {
             string select1 = Console.ReadLine();
             int money1 = int.Parse(select1);
@@ -95,5 +95,35 @@ namespace BANK_DZ
         {
             return _isHave;
         }
+
+        public string SetName()
+        {
+            if (_isHave == true)
+            {
+                Console.WriteLine("У вас уже есть счёт в банке");
+                return _name;
+            }
+            else
+            {
+                Console.WriteLine("Введите ваше имя");
+                string money1 = Console.ReadLine();
+                _name = money1;
+                return _name;
+            }
+        }
+
+        public string GetName()
+        {
+            return _name;
+        }
+
+        public int TakeMoney(Bank bank1)
+        {
+            _money = _money + bank1.GetAccountMoney();
+            Console.WriteLine();
+            Console.WriteLine($"Средства со счёта вернулись, количество ваших средств - {_money}");
+            return _money;
+        }
+
     }
 }
